@@ -37,9 +37,7 @@ my $s = _utf8_slurp('DE.txt');
 my %words_table;
 for my $w (@ws) {
     my $s_tmp = $s;
-    my $offset = 1;
     while ($s_tmp =~ s/\b$w\b//i) {
-        $words_table{$offset + $-[0]} = $w;
-        $offset += length $w;
+        $words_table{$-[0]} = $w;
     }
 }
