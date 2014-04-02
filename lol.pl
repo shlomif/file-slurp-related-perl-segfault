@@ -43,8 +43,3 @@ for my $w (@ws) {
         $offset += length $w;
     }
 }
-
-my @words_sorted = map {$words_table{$_}} sort {$a <=> $b} keys %words_table;
-
-binmode STDOUT, ":encoding(UTF-8)";
-print $_, "\n" for @words_sorted;
