@@ -3,11 +3,6 @@
 use warnings;
 use strict;
 
-use Fcntl qw( O_RDONLY ) ;
-
-my $max_fast_slurp_size = 1024 * 100 ;
-my $is_win32 = $^O =~ /win32/i ;
-
 my $fh;
 open $fh, "<", "words.txt" or die "can't open words set: $!\n";
 binmode $fh, ":encoding(UTF-8)";
