@@ -26,30 +26,6 @@ sub read_file {
 # the test for -s > 0 is to allow pseudo files to be read with the
 # regular loop since they return a size of 0.
 
-    if ( !ref $file_name && -e $file_name && -s _ > 0 &&
-         -s _ < $max_fast_slurp_size && !%{$opts} && !wantarray ) {
-
-
-        my $fh ;
-        unless( sysopen( $fh, $file_name, O_RDONLY ) ) {
-
-            @_ = ( $opts, "read_file '$file_name' - sysopen: $!");
-            goto &_error ;
-        }
-
-        my $read_cnt = sysread( $fh, my $buf, -s _ ) ;
-
-        unless ( defined $read_cnt ) {
-
-            @_ = ( $opts,
-                "read_file '$file_name' - small sysread: $!");
-            goto &_error ;
-        }
-
-        $buf =~ s/\015\012/\n/g if $is_win32 ;
-        return $buf ;
-    }
-
 # set the buffer to either the passed in one or ours and init it to the null
 # string
 
