@@ -1,0 +1,19 @@
+=encoding utf8
+
+=head1 ABOUT
+
+This repository contains the File-Slurp-using perl 5 segfault reproduction
+recipe by mahmoud from Freenode's #perl channel.
+
+=head1 STEPS TO REPRODUCE
+
+1. Install File-Slurp from CPAN.
+
+2. cd to the directory of the repository (that contains "lol.pl").
+
+3. Run lol.pl:
+
+    perl lol.pl
+
+=cut
+
