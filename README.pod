@@ -2,16 +2,17 @@
 
 =head1 ABOUT
 
-This repository contains the File-Slurp-using perl 5 segfault reproduction
+This repository contains the perl 5 segfault reproduction
 recipe by mahmoud from Freenode's #perl channel.
+
+Some tweaks were made to it by Shlomi Fish and it no longer requires
+File-Slurp.
 
 =head1 STEPS TO REPRODUCE
 
-1. Install File-Slurp from CPAN.
+1. cd to the directory of the repository (that contains "lol.pl").
 
-2. cd to the directory of the repository (that contains "lol.pl").
-
-3. Run lol.pl:
+2. Run lol.pl:
 
     perl lol.pl
 
