@@ -5,6 +5,8 @@ use strict;
 
 use utf8;
 
+use Test::More tests => 1;
+
 my @ws = map { quotemeta } split(/\n/, <<'EOF_WORDS');
 de
 een
@@ -1510,3 +1512,5 @@ for my $w (@ws) {
         $words_table{$-[0]} = $w;
     }
 }
+
+pass("Script ran to completion.");
