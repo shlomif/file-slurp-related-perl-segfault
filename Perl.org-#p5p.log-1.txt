@@ -1,0 +1,29 @@
+Apr 02 17:53:48 <rindolf>	Hi all. https://github.com/shlomif/file-slurp-related-perl-segfault - this segfault was reported on Freenode's #perl by mahmoud. We were able to reproduce it with perl-5.18.2 on Mageia, and some older perls installed from perlbrew including perl-5.16.x, and on other systems.
+Apr 02 17:53:49 <dipsy>	[ shlomif/file-slurp-related-perl-segfault · GitHub ]
+Apr 02 17:54:03 <rindolf>	IT doesn't appear to segfault bleadperl though.
+Apr 02 18:41:05 <ilmari>	rindolf: no need for slurping either, inlining the text (with 'use utf8;') also breaks
+Apr 02 18:41:22 <rindolf>	ilmari: OK.
+Apr 02 19:07:14 <ilmari>	rindolf: bisecting now
+Apr 02 19:12:58 <rindolf>	ilmari: thanks!
+Apr 02 19:34:37 <ilmari>	bah
+Apr 02 19:34:41 <ilmari>	rindolf: commit 13b0f67d12a6400f01bbc27945223ca68a12a7ef
+Apr 02 19:34:50 <ilmari>	    re-enable Copy-on-Write by default.
+Apr 02 19:35:22 <rindolf>	ilmari: ah.
+Apr 02 19:35:24 <rindolf>	ilmari: thanks.
+Apr 02 19:35:36 <rindolf>	ilmari: is this where it was fixed or where it was introduced?
+Apr 02 19:35:47 <ilmari>	that's where it was fixed
+Apr 02 19:35:56 *	ilmari tries blead with PERL_NO_COW
+Apr 02 19:36:20 <rindolf>	ilmari: thanks again.
+Apr 03 13:01:30 <rindolf>	ilmari: hi, are you there?
+Apr 03 13:02:02 <ilmari>	rindolf: yup
+Apr 03 13:02:19 <ilmari>	fsvo "here", still on my first coffee...
+Apr 03 13:05:39 <rindolf>	ilmari: ah.
+Apr 03 13:06:07 <rindolf>	ilmari: so what do we do about that segfault?
+Apr 03 13:06:41 <ilmari>	rindolf: I don't know, it's beyond my knowledge to fix
+Apr 03 13:07:00 <rindolf>	ilmari: OK, did it also happen with PERL_NO_COW?
+Apr 03 13:07:06 <ilmari>	17:40 <@ilmari> yep, still segfaults in blead without COW
+Apr 03 13:07:31 <tomboh>	rindolf: do you know of an old version of perl where the same code doesn't segfault?
+Apr 03 13:07:47 <tomboh>	or has it always done so?
+Apr 03 13:07:53 <ilmari>	looks like it's running off the end of the string somewhere in the handling of @- magic
+Apr 03 13:07:54 <rindolf>	ilmari: OK, then I think I'll report it using perlbug.
+Apr 03 13:10:05 <ilmari>	tomboh: segfaults with 5.8.9 and 5.10.1 at least
